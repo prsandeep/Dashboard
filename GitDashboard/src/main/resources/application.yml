@@ -1,0 +1,51 @@
+server:
+  port: 8084
+  address: 10.226.25.31  # Replace with a valid IP
+
+
+spring:
+  application:
+    name: git-service
+    
+  profiles:
+    active: dev  # change to 'prod' or another profile as needed
+
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/Git_service_db
+    username: root
+    password: root
+    driver-class-name:  com.mysql.cj.jdbc.Driver
+
+  security:
+    filter:
+      order: 10
+jwt:
+  secret: ${JWT_SECRET:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
+
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.microservices.authservice: DEBUG
+    org.hibernate.SQL: DEBUG
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+#      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://ttsdashboard.com:8761/eureka
+

@@ -1,0 +1,50 @@
+server:
+  port: 8081
+  address: 10.226.25.31  # Replace with a valid IP
+
+
+spring:
+  application:
+    name: auth-service
+  profiles:
+    active: dev  # change to 'prod' or another profile as needed
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/auth_service_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  security:
+    filter:
+      order: 10
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
+    expiration-ms: 3600000  # 60 minutes
+    refresh-expiration-ms: 86400000  # 24 hours
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    com.microservices.authservice: DEBUG
+    org.hibernate.SQL: DEBUG
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://ttsdashboard.com:8761/eureka
