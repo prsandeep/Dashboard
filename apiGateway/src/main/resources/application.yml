@@ -1,56 +1,56 @@
-jwt:
-  secret: ${JWT_SECRET:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
-  expiration-ms: 3600000  # 60 minutes
-  refresh-expiration-ms: 86400000  # 24 hours
-
-eureka:
-  instance:
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 180
-    lease-expiration-duration-in-seconds: 3600
-  client:
-    fetch-registry: true
-    register-with-eureka: true
-    service-url:
-      defaultZone: http://ttsdashboard.com:8761/eureka
-    enabled: true
-spring:
-  cloud:
-    gateway:
-#      default-filters:
-#        - AddRequestHeader=Authorization,Bearer ${3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
-      routes:
-        - id: auth-service
-          uri: lb://Auth-SERVICE
-          predicates:
-            - Path=/api/auth/**, /api/users/**
-            
-            # http://localhost:8082/
-
-        - id: git-service
-          uri: lb://GIT-SERVICE
-          predicates:
-            - Path=/api/git/dashboard/**, /api/git/backups/**, /api/git/repositories/**, /api/git/users/**
-
-          
-        - id: apisvn-service
-          uri: lb://APISVN-SERVICE
-          predicates:
-            - Path=  /api/svn/dashboard/** , /api/svn/backups/** , /api/svn/repositories/** , /api/svn/users/** ,/api/svn/backup-schedules/** , /api/svn/migrations**
-
-        # Add more service routes as needed
-        - id: bugzilla-service
-          uri: lb://BUGZILLA-SERVICE
-          predicates:
-            - Path=/api/superset/**
-
-
-  main:
-    allow-bean-definition-overriding: true
-
-  application:
-    name: api-gateway
-
-server:
-  port: 8080
-  address: 10.226.25.31  # Replace with a valid IP
+#jwt:
+#  secret: ${JWT_SECRET:3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
+#  expiration-ms: 3600000  # 60 minutes
+#  refresh-expiration-ms: 86400000  # 24 hours
+#
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#    lease-renewal-interval-in-seconds: 180
+#    lease-expiration-duration-in-seconds: 3600
+#  client:
+#    fetch-registry: true
+#    register-with-eureka: true
+#    service-url:
+#      defaultZone: http://ttsdashboard.com:8761/eureka
+#    enabled: true
+#spring:
+#  cloud:
+#    gateway:
+##      default-filters:
+##        - AddRequestHeader=Authorization,Bearer ${3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b}
+#      routes:
+#        - id: auth-service
+#          uri: lb://Auth-SERVICE
+#          predicates:
+#            - Path=/api/auth/**, /api/users/**
+#
+#            # http://localhost:8082/
+#
+#        - id: git-service
+#          uri: lb://GIT-SERVICE
+#          predicates:
+#            - Path=/api/git/dashboard/**, /api/git/backups/**, /api/git/repositories/**, /api/git/users/**
+#
+#
+#        - id: apisvn-service
+#          uri: lb://APISVN-SERVICE
+#          predicates:
+#            - Path=  /api/svn/dashboard/** , /api/svn/backups/** , /api/svn/repositories/** , /api/svn/users/** ,/api/svn/backup-schedules/** , /api/svn/migrations**
+#
+#        # Add more service routes as needed
+#        - id: bugzilla-service
+#          uri: lb://BUGZILLA-SERVICE
+#          predicates:
+#            - Path=/api/superset/**
+#
+#
+#  main:
+#    allow-bean-definition-overriding: true
+#
+#  application:
+#    name: api-gateway
+#
+#server:
+#  port: 8080
+#  address: 10.226.25.31  # Replace with a valid IP

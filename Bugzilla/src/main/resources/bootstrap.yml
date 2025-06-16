@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: bugzilla-service  # Must match exactly
+  #  profiles:
+  #    active: dev
+  cloud:
+    config:
+      uri: http://10.226.25.31:8888  # Config server URL
+      fail-fast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 6
+        max-interval: 2000
+        multiplier: 1.1

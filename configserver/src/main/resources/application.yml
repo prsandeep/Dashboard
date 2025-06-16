@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: dev
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/prsandeep/microservices-config
+          clone-on-start: true
+          default-label: main
+#          search-paths:
+#            - '{application}'
+#            - 'common'
+#            - 'gateway'
+#            - 'auth'
+#            - 'services'
+          timeout: 10
+          force-pull: true
+
+server:
+  port: 8888
+  address: 10.226.25.31
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://ttsdashboard.com:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, refresh, env, configprops
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.cloud.config: DEBUG

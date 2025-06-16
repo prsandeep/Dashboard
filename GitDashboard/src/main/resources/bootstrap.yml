@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: git-service  # Change this for each service (git-service, apisvn-service, etc.)
+  #  profiles:
+  #    active: dev         # or prod, test, etc.
+  cloud:
+    config:
+      uri: http://10.226.25.31:8888  # Config server URL
+      fail-fast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 6
+        max-interval: 2000
+        multiplier: 1.1
+      # If you enabled security on config server
+      # username: config-admin
+      # password: admin123
+
+  # For service discovery of config server (alternative to fixed URI)
+  # cloud:
+  #   config:
+  #     discovery:
+  #       enabled: true
+  #       service-id: config-server

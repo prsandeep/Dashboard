@@ -1,26 +1,50 @@
-eureka:
-  instance:
-    hostname: 10.226.25.31
-  client:
-    fetch-registry: false
-    register-with-eureka: false
-
+#server:
+#  port: 8761
+#  address: 10.226.25.31
+#
+#spring:
+#  application:
+#    name: serviceRegistry
+#
 #eureka:
 #  instance:
-#    hostname: localhost
+#    hostname: 10.226.25.31
+#    # Ensure the instance uses the correct IP
+#    ip-address: 10.226.25.31
+#    prefer-ip-address: true
+#    # Health check configuration
+#    health-check-url-path: /actuator/health
+#    status-page-url-path: /actuator/info
 #  client:
+#    # Disable registration with itself (standalone mode)
 #    fetch-registry: false
 #    register-with-eureka: false
-
-server:
-  port: 8761
-  address:  10.226.25.31
-
-
-
-
-
-
-
-
-
+#    # Critical: Set the correct service URL to prevent localhost connections
+#    service-url:
+#      defaultZone: http://10.226.25.31:8761/eureka/
+#  server:
+#    # Disable self-preservation for development
+#    enable-self-preservation: false
+#    # Prevent peer node updates that cause connection errors
+#    renewal-percent-threshold: 0.85
+#    # Disable sync with other Eureka nodes
+#    number-of-replication-retries: 0
+#    max-elements-in-peer-replication-pool: 0
+#
+## Management endpoints for monitoring
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,info,env,eureka
+#  endpoint:
+#    health:
+#      show-details: always
+#
+## Logging configuration to reduce noise
+#logging:
+#  level:
+#    com.netflix.eureka.cluster.ReplicationTaskProcessor: WARN
+#    com.netflix.eureka.registry.AbstractInstanceRegistry: INFO
+#    com.netflix.discovery: INFO
+#    root: INFO
